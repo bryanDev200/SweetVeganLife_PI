@@ -1,10 +1,10 @@
 package com.sweet.entity;
 
 	import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
+	import java.util.HashSet;
+	import java.util.Set;
+	
+	import javax.persistence.Column;
 	import javax.persistence.Entity;
 	import javax.persistence.FetchType;
 	import javax.persistence.GeneratedValue;
@@ -14,10 +14,10 @@ import javax.persistence.Column;
 	import javax.persistence.ManyToOne;
 	import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.sweet.utils.Authority;
+	import org.springframework.security.core.GrantedAuthority;
+	import org.springframework.security.core.userdetails.UserDetails;
+	
+	import com.sweet.utils.Authority;
 
 @Entity
 @Table(name = "tb_user")
