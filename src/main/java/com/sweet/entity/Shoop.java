@@ -31,6 +31,12 @@ public class Shoop {
 	@OneToMany(mappedBy = "shoop", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<User> users = new HashSet<>();
 
+	public Shoop(long shoopId) {
+		this.shoopId = shoopId;
+	}
+	
+	public Shoop() {}
+	
 	public long getShoopId() {
 		return shoopId;
 	}

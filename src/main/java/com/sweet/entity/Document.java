@@ -28,6 +28,12 @@ public class Document {
 	@OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<User> users = new HashSet<>();
 
+	public Document() {}
+	
+	public Document(long documentId) {
+		this.documentId = documentId;
+	}
+	
 	public long getDocumentId() {
 		return documentId;
 	}
