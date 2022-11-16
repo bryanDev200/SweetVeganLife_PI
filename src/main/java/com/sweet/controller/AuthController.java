@@ -22,17 +22,15 @@ package com.sweet.controller;
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-
     @Autowired
     private JwtUtils jwtUtils;
-
+    
     @PostMapping("/generate-token")
-    public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+    public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try{
-            autenticar(jwtRequest.getUsername(),jwtRequest.getPassword());
+            auth(jwtRequest.getUsername(),jwtRequest.getPassword());
         }catch (Exception exception){
             exception.printStackTrace();
             throw new Exception("Usuario no encontrado");
@@ -43,7 +41,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    private void autenticar(String username,String password) throws Exception {
+    private void auth(String username,String password) throws Exception {
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
         }catch (DisabledException exception){
