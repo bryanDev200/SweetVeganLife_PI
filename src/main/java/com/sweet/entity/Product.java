@@ -32,14 +32,6 @@ public class Product {
 	private int productStock;
 	@Column(name = "product_state")
 	private boolean productState;
-	@Column(name = "creation_date")
-	private String creationDate;
-	@Column(name = "modification_date")
-	private String modificationDate;
-	@Column(name = "creation_user")
-	private String creationUser;
-	@Column(name = "modification_user")
-	private String modificationUser;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplier_id", nullable = false)
@@ -97,38 +89,6 @@ public class Product {
 	
 	public void setProductState(boolean productState) {
 		this.productState = productState;
-	}
-	
-	public String getCreationDate() {
-		return creationDate;
-	}
-	
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	public String getModificationDate() {
-		return modificationDate;
-	}
-	
-	public void setModificationDate(String modificationDate) {
-		this.modificationDate = modificationDate;
-	}
-	
-	public String getCreationUser() {
-		return creationUser;
-	}
-	
-	public void setCreationUser(String creationUser) {
-		this.creationUser = creationUser;
-	}
-	
-	public String getModificationUser() {
-		return modificationUser;
-	}
-	
-	public void setModificationUser(String modificationUser) {
-		this.modificationUser = modificationUser;
 	}
 	
 	public Supplier getSupplier() {

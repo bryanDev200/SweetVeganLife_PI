@@ -25,8 +25,6 @@ public class Order {
 	private String orderState;
 	@Column(name = "final_amount")
 	private double finalAmount;
-	@Column(name = "creation_date")
-	private String creationDate;
 	@Column(name = "creation_user")
 	private String creationUser;
 	
@@ -78,14 +76,6 @@ public class Order {
 	
 	public void setFinalAmount(double finalAmount) {
 		this.finalAmount = finalAmount;
-	}
-	
-	public String getCreationDate() {
-		return creationDate;
-	}
-	
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
 	}
 	
 	public String getCreationUser() {
