@@ -51,6 +51,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/products/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
 			.anyRequest().authenticated();
 			http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
