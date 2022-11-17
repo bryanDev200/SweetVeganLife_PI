@@ -38,6 +38,15 @@ public class Rol {
 			   inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "permission_id"))
 	private Set<Permission> permissions = new HashSet<>();
 
+	public Rol(long rolId, String rolName, String rolDescription, Set<User> users, Set<Permission> permissions) {
+		super();
+		this.rolId = rolId;
+		this.rolName = rolName;
+		this.rolDescription = rolDescription;
+		this.users = users;
+		this.permissions = permissions;
+	}
+
 	public Rol(long rolId) {
 		this.rolId = rolId;
 	}

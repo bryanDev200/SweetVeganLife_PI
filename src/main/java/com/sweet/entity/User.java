@@ -1,8 +1,4 @@
 package com.sweet.entity;
-
-	import java.util.Collection;
-	import java.util.HashSet;
-	import java.util.Set;
 	
 	import javax.persistence.Column;
 	import javax.persistence.Entity;
@@ -14,14 +10,9 @@ package com.sweet.entity;
 	import javax.persistence.ManyToOne;
 	import javax.persistence.Table;
 
-	import org.springframework.security.core.GrantedAuthority;
-	import org.springframework.security.core.userdetails.UserDetails;
-	
-	import com.sweet.utils.Authority;
-
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails {
+public class User {
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +43,15 @@ public class User implements UserDetails {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "shoop_id", nullable = false)
 	private Shoop shoop;
+	
+	public User(String userName, String password, Rol userRol) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.userRol = userRol;
+	}
+
+	public User() {}
 	
 	public long getUserId() {
 		return userId;
@@ -148,38 +148,4 @@ public class User implements UserDetails {
 	public void setShoop(Shoop shoop) {
 		this.shoop = shoop;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<Authority> authorities = new HashSet<>();
-		this.userRol.getPermissions().forEach((permission) -> {
-			authorities.add(new Authority(permission.getPermissionName()));
-		});
-		return authorities;
-	}
-
-	@Override
-	public String getUsername() {
-		return userName;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return enabledUser;
-	}	
 }
