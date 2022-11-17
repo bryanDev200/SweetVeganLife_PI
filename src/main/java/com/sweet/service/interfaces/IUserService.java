@@ -6,4 +6,5 @@ package com.sweet.service.interfaces;
 public interface IUserService {
 	public User getUserByUsername(String username);
 	public User saveUser(SaveUserDTO user);
+	public String updateUser(SaveUserDTO user, long id);
 }
