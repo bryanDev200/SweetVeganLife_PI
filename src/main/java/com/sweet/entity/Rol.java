@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_rol")
 public class Rol {
@@ -29,6 +31,7 @@ public class Rol {
 	@Column(name = "rol_description")
 	private String rolDescription;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "userRol", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<User> users = new HashSet<>();
 	

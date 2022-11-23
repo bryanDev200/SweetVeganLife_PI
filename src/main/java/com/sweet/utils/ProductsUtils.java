@@ -11,6 +11,7 @@ public class ProductsUtils {
 		products.setDescription(product.getProductDescription());
 		products.setName(product.getProductName());
 		products.setPrice(product.getProductPrice());
+		products.setImages(product.getImages());
 		products.setStock(product.getProductStock());
 		products.setCategory(product.getSubCategory().getCategory().getCategoryName());
 		

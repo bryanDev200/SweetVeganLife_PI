@@ -45,11 +45,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()		
 			.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
-			.antMatchers(HttpMethod.PUT, "/api/user/**").permitAll()
-			.antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/api/products/**").permitAll()
-			.antMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+			.antMatchers("/api/user/**").permitAll()
+			//.antMatchers(HttpMethod.PUT, "/api/user/**").permitAll()
+			//.antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
+			//.antMatchers(HttpMethod.POST, "/api/products/**").permitAll()
+			//.antMatchers("/api/products/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
 			.anyRequest().authenticated();
 			http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -10,6 +10,8 @@ package com.sweet.entity;
 	import javax.persistence.ManyToOne;
 	import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_product_images")
 public class ProductImage {
@@ -20,6 +22,7 @@ public class ProductImage {
 	@Column(name = "imnage_url")
 	private String imageUrl;
 	
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;

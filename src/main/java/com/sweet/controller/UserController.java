@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 	import com.sweet.service.interfaces.IUserService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/user")
 public class UserController {
 	@Autowired

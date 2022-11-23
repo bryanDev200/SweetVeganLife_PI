@@ -1,10 +1,16 @@
 package com.sweet.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.sweet.entity.ProductImage;
+
 public class ProductsList {
 	private long productId;
 	private String description;
 	private String name;
 	private double price;
+	private Set<ProductImage> images = new HashSet<>();
 	private int stock;
 	private String category;
 	
@@ -54,5 +60,13 @@ public class ProductsList {
 	
 	public void setCategory(String category) {
 		this.category = category;
-	}	
+	}
+
+	public Set<ProductImage> getImages() {
+		return images;
+	}
+
+	public void setImages(Set<ProductImage> images) {
+		this.images = images;
+	}		
 }
