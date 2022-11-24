@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 	import com.sweet.dto.JwtRequest;
 	import com.sweet.dto.JwtResponse;
-	import com.sweet.repository.IUserDAO;
+import com.sweet.entity.User;
+import com.sweet.repository.IUserDAO;
 	import com.sweet.security.JwtTokenProvider;
+import com.sweet.service.interfaces.IUserService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -26,6 +28,8 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
+	@Autowired
+	private IUserService service;
 	
 	@PostMapping("/iniciarSesion")
 	public ResponseEntity<JwtResponse> authenticateUser(@RequestBody JwtRequest loginDTO){
@@ -33,8 +37,16 @@ public class AuthController {
 										.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), 
 																						      loginDTO.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		//obtenemos el token del jwtTokenProvider
 		String token = jwtTokenProvider.generarToken(authentication);
-		return ResponseEntity.ok(new JwtResponse(token));
+		User user = service.getUserByUsername(loginDTO.getUsername());
+		JwtResponse response = new JwtResponse(token);
+		response.setFirstName(user.getUserFirstNames());
+		response.setLastName(user.getUserLastName());
+		response.setPhone(user.getUserPhone());
+		response.setImage(user.getUserImage());
+		response.setUsername(user.getUserName());
+		response.setRol(user.getUserRol());
+		
+		return ResponseEntity.ok(response);
 	}
 }
