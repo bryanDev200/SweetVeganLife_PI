@@ -46,6 +46,7 @@ public class AuthController {
 		response.setImage(user.getUserImage());
 		response.setUsername(user.getUserName());
 		response.setRol(user.getUserRol());
+		response.setId(user.getUserId());
 		
 		return ResponseEntity.ok(response);
 	}

@@ -15,7 +15,7 @@ package com.sweet.entity;
 public class User {
 	@Id
 	@Column(name = "user_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long userId;
 	@Column(name = "name_user")
 	private String userFirstNames;

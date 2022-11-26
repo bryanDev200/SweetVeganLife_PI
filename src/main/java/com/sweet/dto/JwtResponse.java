@@ -3,6 +3,7 @@ package com.sweet.dto;
 import com.sweet.entity.Rol;
 
 public class JwtResponse {
+	private long id;
     private String token;
     private String firstName;
     private String lastName;
@@ -18,7 +19,15 @@ public class JwtResponse {
     public JwtResponse() {
     }
     
-    public String getFirstName() {
+    public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
 		return firstName;
 	}
     
