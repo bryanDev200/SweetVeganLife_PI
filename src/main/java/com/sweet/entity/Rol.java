@@ -12,12 +12,11 @@ package com.sweet.entity;
 	import javax.persistence.Id;
 	import javax.persistence.JoinColumn;
 	import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+	import javax.persistence.ManyToMany;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+	import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tb_rol")
@@ -40,22 +39,14 @@ public class Rol {
 				joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "rol_id"), 
 			   inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "permission_id"))
 	private Set<Permission> permissions = new HashSet<>();
-
-	public Rol(long rolId, String rolName, String rolDescription, Set<User> users, Set<Permission> permissions) {
-		super();
-		this.rolId = rolId;
-		this.rolName = rolName;
-		this.rolDescription = rolDescription;
-		this.users = users;
-		this.permissions = permissions;
-	}
-
-	public Rol(long rolId) {
-		this.rolId = rolId;
-	}
 	
 	public Rol() {}
 	
+	public Rol(long rolId) {
+		super();
+		this.rolId = rolId;
+	}
+
 	public long getRolId() {
 		return rolId;
 	}
@@ -94,5 +85,5 @@ public class Rol {
 
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
-	}	
+	}
 }

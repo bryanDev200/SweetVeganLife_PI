@@ -7,9 +7,9 @@ package com.sweet.repository;
 	import org.springframework.stereotype.Repository;
 
 	import com.sweet.entity.Product;
-	
+
 @Repository
-public interface IProductDAO extends JpaRepository<Product, Long>{
-	@Query(value = "{call list_all_products() }", nativeQuery = true)
-	public List<Product> listAllProducts();
+public interface ProductDAO extends JpaRepository<Product, Long>{
+	@Query("select p from Product p where (p.productName like ?1) and (?2 is -1 or p.subCategory.subCategoryId = ?2)")
+	public List<Product> getAllProducts(String name, int categoryId);
 }
