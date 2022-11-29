@@ -18,10 +18,10 @@ public class OrderDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id", nullable = false)	
 	private Product product;
 	
@@ -30,6 +30,16 @@ public class OrderDetail {
 	@Column(name = "price")
 	private double price;
 	
+	public OrderDetail() {}
+	
+	public OrderDetail(Order order, Product product, int quantity, double price) {
+		super();
+		this.order = order;
+		this.product = product;
+		this.quantity = quantity;
+		this.price = price;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -68,5 +78,5 @@ public class OrderDetail {
 	
 	public void setPrice(double price) {
 		this.price = price;
-	}	
+	}
 }

@@ -25,6 +25,13 @@ public class Payment {
 	@OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Order> orders = new HashSet<>();
 
+	public Payment() {}
+	
+	public Payment(long paymentId) {
+		super();
+		this.paymentId = paymentId;
+	}
+
 	public long getPaymentId() {
 		return paymentId;
 	}
