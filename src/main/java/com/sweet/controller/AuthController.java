@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 	import com.sweet.dto.JwtRequest;
 	import com.sweet.dto.JwtResponse;
 import com.sweet.entity.User;
-import com.sweet.repository.IUserDAO;
+import com.sweet.repository.UserDAO;
 	import com.sweet.security.JwtTokenProvider;
 import com.sweet.service.interfaces.IUserService;
 

@@ -14,12 +14,12 @@ package com.sweet.security;
 	
 	import com.sweet.entity.Rol;
 	import com.sweet.entity.User;
-	import com.sweet.repository.IUserDAO;
+	import com.sweet.repository.UserDAO;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
-	private IUserDAO userDAO;
+	private UserDAO userDAO;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

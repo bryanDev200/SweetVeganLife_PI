@@ -12,6 +12,8 @@ package com.sweet.entity;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
+	import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_shoop")
 public class Shoop {
@@ -28,13 +30,15 @@ public class Shoop {
 	@Column(name = "shoop_number")
 	private int shoopNumber;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "shoop", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<User> users = new HashSet<>();
-
+	
 	public Shoop(long shoopId) {
+		super();
 		this.shoopId = shoopId;
 	}
-	
+
 	public Shoop() {}
 	
 	public long getShoopId() {

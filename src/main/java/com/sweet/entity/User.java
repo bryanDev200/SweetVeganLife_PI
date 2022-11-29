@@ -37,12 +37,17 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "rol_id", nullable = false)
 	private Rol userRol;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "document_id", nullable = false)
 	private Document document;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "shoop_id", nullable = false)
 	private Shoop shoop;
+	
+	public User(long userId) {
+		super();
+		this.userId = userId;
+	}
 	
 	public User(String userName, String password, Rol userRol) {
 		super();

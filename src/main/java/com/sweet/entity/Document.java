@@ -11,8 +11,9 @@ package com.sweet.entity;
 	import javax.persistence.Id;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
-	
+
 	import com.fasterxml.jackson.annotation.JsonBackReference;
+	import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_document")
@@ -24,16 +25,17 @@ public class Document {
 	@Column(name = "description_document")
 	private String description;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<User> users = new HashSet<>();
-
-	public Document() {}
 	
 	public Document(long documentId) {
+		super();
 		this.documentId = documentId;
 	}
 	
+	public Document() {}
+
 	public long getDocumentId() {
 		return documentId;
 	}

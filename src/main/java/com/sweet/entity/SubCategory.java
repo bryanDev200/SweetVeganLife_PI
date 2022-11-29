@@ -20,9 +20,16 @@ public class SubCategory {
 	@Column(name = "subcategory_name")
 	private String subCategoryName;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
+
+	public SubCategory() {}
+	
+	public SubCategory(long subCategoryId) {
+		super();
+		this.subCategoryId = subCategoryId;
+	}
 
 	public long getSubCategoryId() {
 		return subCategoryId;
