@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_rol")
 public class Rol {
@@ -29,6 +31,7 @@ public class Rol {
 	@Column(name = "rol_description")
 	private String rolDescription;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "userRol", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<User> users = new HashSet<>();
 	
@@ -37,6 +40,15 @@ public class Rol {
 				joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "rol_id"), 
 			   inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "permission_id"))
 	private Set<Permission> permissions = new HashSet<>();
+
+	public Rol(long rolId, String rolName, String rolDescription, Set<User> users, Set<Permission> permissions) {
+		super();
+		this.rolId = rolId;
+		this.rolName = rolName;
+		this.rolDescription = rolDescription;
+		this.users = users;
+		this.permissions = permissions;
+	}
 
 	public Rol(long rolId) {
 		this.rolId = rolId;

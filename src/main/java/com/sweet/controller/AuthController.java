@@ -3,53 +3,51 @@ package com.sweet.controller;
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.http.ResponseEntity;
 	import org.springframework.security.authentication.AuthenticationManager;
-	import org.springframework.security.authentication.BadCredentialsException;
-	import org.springframework.security.authentication.DisabledException;
 	import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-	import org.springframework.security.core.userdetails.UserDetails;
+	import org.springframework.security.core.Authentication;
+	import org.springframework.security.core.context.SecurityContextHolder;
+	import org.springframework.security.crypto.password.PasswordEncoder;
 	import org.springframework.web.bind.annotation.CrossOrigin;
 	import org.springframework.web.bind.annotation.PostMapping;
 	import org.springframework.web.bind.annotation.RequestBody;
-	import org.springframework.web.bind.annotation.RestController;
-	
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 	import com.sweet.dto.JwtRequest;
 	import com.sweet.dto.JwtResponse;
-	import com.sweet.security.JwtUtils;
-	import com.sweet.security.UserDetailsServiceImpl;
+import com.sweet.entity.User;
+import com.sweet.repository.IUserDAO;
+	import com.sweet.security.JwtTokenProvider;
+import com.sweet.service.interfaces.IUserService;
 
 @RestController
-@CrossOrigin("*")
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private JwtUtils jwtUtils;
-
-    @PostMapping("/generate-token")
-    public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-        try{
-            autenticar(jwtRequest.getUsername(),jwtRequest.getPassword());
-        }catch (Exception exception){
-            exception.printStackTrace();
-            throw new Exception("Usuario no encontrado");
-        }
-
-        UserDetails userDetails =  this.userDetailsService.loadUserByUsername(jwtRequest.getUsername());
-        String token = this.jwtUtils.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
-    }
-
-    private void autenticar(String username,String password) throws Exception {
-        try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
-        }catch (DisabledException exception){
-            throw  new Exception("USUARIO DESHABILITADO " + exception.getMessage());
-        }catch (BadCredentialsException e){
-            throw  new Exception("Credenciales invalidas " + e.getMessage());
-        }
-    }
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
+	@Autowired
+	private IUserService service;
+	
+	@PostMapping("/iniciarSesion")
+	public ResponseEntity<JwtResponse> authenticateUser(@RequestBody JwtRequest loginDTO){
+		Authentication authentication = authenticationManager
+										.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), 
+																						      loginDTO.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String token = jwtTokenProvider.generarToken(authentication);
+		User user = service.getUserByUsername(loginDTO.getUsername());
+		JwtResponse response = new JwtResponse(token);
+		response.setFirstName(user.getUserFirstNames());
+		response.setLastName(user.getUserLastName());
+		response.setPhone(user.getUserPhone());
+		response.setImage(user.getUserImage());
+		response.setUsername(user.getUserName());
+		response.setRol(user.getUserRol());
+		response.setId(user.getUserId());
+		
+		return ResponseEntity.ok(response);
+	}
 }
