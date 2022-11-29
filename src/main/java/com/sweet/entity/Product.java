@@ -33,16 +33,23 @@ public class Product {
 	@Column(name = "product_state")
 	private boolean productState;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "supplier_id", nullable = false)
 	private Supplier supplier;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subcategory_id", nullable = false)
 	private SubCategory subCategory;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ProductImage> images = new HashSet<>();
 	
+	public Product() {}
+	
+	public Product(long productId) {
+		super();
+		this.productId = productId;
+	}
+
 	public long getProductId() {
 		return productId;
 	}
@@ -113,5 +120,5 @@ public class Product {
 
 	public void setImages(Set<ProductImage> images) {
 		this.images = images;
-	}	
+	}
 }
