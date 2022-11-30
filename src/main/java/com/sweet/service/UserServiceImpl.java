@@ -23,7 +23,7 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public User getUserByUsername(String username) {
-		return userDAO.findByUserName(username).get();
+		return userDAO.findByUserName(username).orElse(null);
 	}
 
 	@Override

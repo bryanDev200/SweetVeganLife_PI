@@ -24,4 +24,22 @@ public class UserModelMapper {
 		
 		return user;
 	}
+	
+	public static SaveUserDTO mapToDto(User user) {
+		SaveUserDTO dto = new SaveUserDTO();
+		
+		dto.setDocNumber(user.getDniNumber());
+		dto.setPassword(user.getPassword());
+		dto.setImage(user.getUserImage());
+		dto.setLastName(user.getUserLastName());
+		dto.setFirstName(user.getUserFirstNames());
+		dto.setUserName(user.getUserName());
+		dto.setPhone(user.getUserPhone());
+		dto.setDocumentId((int)user.getDocument().getDocumentId());
+		dto.setShoopId((int)user.getShoop().getShoopId());
+		dto.setRolId((int)user.getUserRol().getRolId());
+		dto.setEnabled(user.isEnabledUser());
+		
+		return dto;
+	}
 }
