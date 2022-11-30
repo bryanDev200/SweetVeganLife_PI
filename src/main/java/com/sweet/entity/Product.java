@@ -15,6 +15,8 @@ package com.sweet.entity;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_product")
 public class Product {
