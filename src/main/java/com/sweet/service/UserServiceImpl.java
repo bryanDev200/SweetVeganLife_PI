@@ -86,7 +86,8 @@ public class UserServiceImpl implements IUserService {
 	public List<UserListItemDTO> getAllUsers(String names, int roleId, int shoopId) {
 		List<UserListItemDTO> data = userDAO.getAllUserFilters(names, roleId, shoopId).stream()
 				.map((user) -> new UserListItemDTO((int)user.getUserId(), user.getUserFirstNames(),
-						user.getUserLastName(), user.getUserRol().getRolDescription())).collect(Collectors.toList());
+						user.getUserLastName(), user.getUserRol().getRolDescription(),
+						user.getUserPhone(), user.getDniNumber())).collect(Collectors.toList());
 		return data;
 	}
 }
