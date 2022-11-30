@@ -9,7 +9,9 @@ package com.sweet.controller;
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.http.HttpStatus;
 	import org.springframework.http.ResponseEntity;
-	import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 	import org.springframework.web.bind.annotation.CrossOrigin;
 	import org.springframework.web.bind.annotation.DeleteMapping;
 	import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +23,13 @@ package com.sweet.controller;
 	import org.springframework.web.bind.annotation.RequestParam;
 	import org.springframework.web.bind.annotation.RestController;
 
-	import com.sweet.dto.SaveUserDTO;
+import com.sweet.dto.SendEmailDTO;
+import com.sweet.dto.ChangePasswordDTO;
+import com.sweet.dto.SaveUserDTO;
 	import com.sweet.dto.UserListItemDTO;
 	import com.sweet.entity.User;
 	import com.sweet.service.interfaces.IUserService;
+import com.sweet.utils.UserModelMapper;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -34,7 +39,7 @@ public class UserController {
 	private IUserService userService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	@PostMapping("/register")
 	public ResponseEntity<?> registerNewUser(@RequestBody SaveUserDTO user) {
 		HashMap<String, Object> response = new HashMap<>();

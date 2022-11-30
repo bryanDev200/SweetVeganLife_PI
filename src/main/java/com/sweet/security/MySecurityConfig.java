@@ -47,6 +47,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
 			.antMatchers("/api/user/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+			.antMatchers("/api/utils/**").permitAll()
 			.anyRequest().authenticated();
 			http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
