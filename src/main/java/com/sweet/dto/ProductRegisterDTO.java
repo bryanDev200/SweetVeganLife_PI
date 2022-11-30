@@ -8,11 +8,12 @@ public class ProductRegisterDTO {
 	private int subcategoryId;
 	private int supplierId;
 	private boolean enabled;
+	private String urlImage;
 	
 	public ProductRegisterDTO() {}
 	
 	public ProductRegisterDTO(String description, String name, double price, int stock, int subcategoryId,
-			int supplierId, boolean enabled) {
+			int supplierId, boolean enabled, String urlImage) {
 		super();
 		this.description = description;
 		this.name = name;
@@ -21,8 +22,17 @@ public class ProductRegisterDTO {
 		this.subcategoryId = subcategoryId;
 		this.supplierId = supplierId;
 		this.enabled = enabled;
+		this.urlImage = urlImage;
 	}
 	
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
+
 	public boolean isEnabled() {
 		return enabled;
 	}
