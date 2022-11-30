@@ -52,4 +52,8 @@ public class OrderService implements IOrderService {
 		return lastOrder;
 	}
 
+	@Override
+	public List<Order> getOrdersByUserId(int userId) {
+		return orderRepo.getAllOrdersByUserId((long)userId);
+	}
 }
