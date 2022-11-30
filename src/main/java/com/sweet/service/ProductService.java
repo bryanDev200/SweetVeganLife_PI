@@ -8,11 +8,13 @@ package com.sweet.service;
 
 	import com.sweet.dto.ProductListItemDTO;
 	import com.sweet.dto.ProductRegisterDTO;
-	import com.sweet.entity.Product;
+import com.sweet.dto.ProductsList;
+import com.sweet.entity.Product;
 	import com.sweet.entity.SubCategory;
 	import com.sweet.entity.Supplier;
 	import com.sweet.repository.ProductDAO;
 	import com.sweet.service.interfaces.IProductService;
+import com.sweet.utils.ProductsUtils;
 
 @Service
 public class ProductService implements IProductService {
@@ -98,5 +100,12 @@ public class ProductService implements IProductService {
 		}else {
 			return "El producto no ha sido encontrado";
 		}
+	}
+
+	@Override
+	public List<ProductsList> listAllProductsOld() {
+		List<ProductsList> list = repo.listAllProducts()
+				.stream().map((product) -> ProductsUtils.maptoProductsList(product)).collect(Collectors.toList());
+		return list;
 	}	
 }
