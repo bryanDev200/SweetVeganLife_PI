@@ -25,7 +25,8 @@ package com.sweet.controller;
 
 	import com.sweet.dto.ProductListItemDTO;
 	import com.sweet.dto.ProductRegisterDTO;
-	import com.sweet.entity.Product;
+import com.sweet.dto.ProductsList;
+import com.sweet.entity.Product;
 	import com.sweet.service.interfaces.IProductService;
 
 @CrossOrigin(origins = "*")
@@ -36,6 +37,13 @@ public class ProductController {
 	private IProductService productService;
 	/*@Autowired
 	private IProductImageService piService;*/
+	
+	@GetMapping("/list")
+	public ResponseEntity<?> listAll(){
+		HashMap<String, Object> response = new HashMap<String, Object>();
+		response.put("products", productService.listAllProductsOld());
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 	
 	@GetMapping("/all")
 	public ResponseEntity<?> listAllProducts(){
