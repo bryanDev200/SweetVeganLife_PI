@@ -10,6 +10,8 @@ package com.sweet.entity;
 	import javax.persistence.ManyToOne;
 	import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_order_detail")
 public class OrderDetail {
@@ -18,6 +20,7 @@ public class OrderDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;

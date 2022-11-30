@@ -1,8 +1,11 @@
 package com.sweet.entity;
 
 	import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-	import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 	import javax.persistence.Entity;
 	import javax.persistence.FetchType;
 	import javax.persistence.GeneratedValue;
@@ -10,7 +13,8 @@ package com.sweet.entity;
 	import javax.persistence.Id;
 	import javax.persistence.JoinColumn;
 	import javax.persistence.ManyToOne;
-	import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_order")
@@ -36,11 +40,22 @@ public class Order {
 	@JoinColumn(name = "payment_id", nullable = false)
 	private Payment payment;
 	
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<OrderDetail> details = new HashSet<>();
+	
 	public Order() {}
 	
 	public Order(long orderId) {
 		super();
 		this.orderId = orderId;
+	}
+	
+	public Set<OrderDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(Set<OrderDetail> details) {
+		this.details = details;
 	}
 
 	public long getOrderId() {

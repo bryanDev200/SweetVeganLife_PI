@@ -12,6 +12,8 @@ package com.sweet.entity;
 	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_payment")
 public class Payment {
@@ -22,6 +24,7 @@ public class Payment {
 	@Column(name = "payment_description")
 	private String paymentDescription;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Order> orders = new HashSet<>();
 
