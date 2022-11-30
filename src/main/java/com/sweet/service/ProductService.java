@@ -53,7 +53,8 @@ public class ProductService implements IProductService {
 		List<ProductListItemDTO> data = repo.getAllProducts(names, id).stream()
 				.map((product) -> new ProductListItemDTO((int)product.getProductId(),
 						product.getProductName(), product.getProductPrice(),
-						product.getSubCategory().getSubCategoryName()))
+						product.getSubCategory().getSubCategoryName(), product.getProductDescription(),
+						product.getProductStock(), product.getImages()))
 				.collect(Collectors.toList());
 		return data;
 	}
