@@ -1,42 +1,85 @@
 package com.sweet.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.sweet.entity.ProductImage;
+
 public class ProductListItemDTO {
-	private int id;
-	private String names;
+	private int productId;
+	private String description;
+	private String name;
 	private double price;
-	private String subCategoria;
+	private Set<ProductImage> images = new HashSet<>();
+	private int stock;
+	private String category;
 	
 	public ProductListItemDTO() {}
 	
-	public ProductListItemDTO(int id, String names, double price, String subCategoria) {
+	public ProductListItemDTO(int id, String names, double price, String subCategoria, String description, int stock, Set<ProductImage> images) {
 		super();
-		this.id = id;
-		this.names = names;
+		this.productId = id;
+		this.name = names;
 		this.price = price;
-		this.subCategoria = subCategoria;
+		this.category = subCategoria;
+		this.description = description;
+		this.stock = stock;
+		this.images = images;
 	}
-	public int getId() {
-		return id;
+
+	public int getProductId() {
+		return productId;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
-	public String getNames() {
-		return names;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setNames(String names) {
-		this.names = names;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public String getSubCategoria() {
-		return subCategoria;
+
+	public Set<ProductImage> getImages() {
+		return images;
 	}
-	public void setSubCategoria(String subCategoria) {
-		this.subCategoria = subCategoria;
-	}	
+
+	public void setImages(Set<ProductImage> images) {
+		this.images = images;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 }
